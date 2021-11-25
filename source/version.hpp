@@ -33,9 +33,10 @@
 
 #include <string>
 
-#define DEBUG_MODE
+// #define DEBUG_MODE
 
 static const std::string PROGNME = "simulator";
 static const std::string VERSION = "0.0.1";
+static const std::string STDLIB = "stdlib.so";
 
 #endif // VERSION_HPP

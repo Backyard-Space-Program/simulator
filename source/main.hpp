@@ -34,6 +34,7 @@
 #include <string>
 #include <unordered_map>
 #include <algorithm>
+#include <assert.h>
 
 #include "lib.hpp"
 #include "args.hpp"
@@ -41,6 +42,7 @@
 #include "load_object.hpp"
 #include "autorelease.hpp"
 #include "thread.hpp"
+#include "board.hpp"
 
 extern AutoreleasePool global_pool;
 

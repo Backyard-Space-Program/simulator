@@ -31,6 +31,10 @@
 #if !defined(BOARD_HPP)
 #define BOARD_HPP
 
+#include <string>
+#include <vector>
+#include "../stdlib/pin.hpp"
+
 enum PinType {
 	GPIO,
 
@@ -46,8 +50,8 @@ enum PinType {
 
 	// POWER
 	GND,
-	5V,
-	3V,
+	_5V,
+	_3V,
 	VIN,
 	RESET,
 
@@ -55,15 +59,15 @@ enum PinType {
 	SERIAL,
 	SERIAL1,
 	SERIAL2
-}
+};
 
 struct Pin {
 	unsigned int pinNo;
 	std::string name;
 	PinType type;
 
+	Mode mode; // GPIO only?
 	double voltage; // GPIO only
-
 
 	bool isPWM;
 	bool isAnalog;
@@ -71,11 +75,13 @@ struct Pin {
 };
 
 class Board {
-private:
-	bool isRunning;
+public:
 	std::string name;
 	unsigned int numPins;
-	Pin pins[];
+	Pin* pins;
+
+	double pin_high;
+	double pin_low;
 
 };
 

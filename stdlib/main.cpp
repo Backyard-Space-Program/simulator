@@ -30,4 +30,4 @@
 
 #include "main.hpp"
 
-extern Board board;
+Board* board;

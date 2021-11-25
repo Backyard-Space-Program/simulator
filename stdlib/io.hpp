@@ -31,12 +31,16 @@
 #if !defined(IO_HPP)
 #define IO_HPP
 
+#include <iostream>
 #include "main.hpp"
 #include "pin.hpp"
+#include "../source/board.hpp"
 
-void pinMode(Pin, Mode);
-int digitalRead(Pin);
-void digitalWrite(Pin, Mode);
+extern "C" {
+	void pinMode(PinNo, Mode);
+	int digitalRead(PinNo);
+	void digitalWrite(PinNo, Mode);
+}
 
 // TODO: finish io funcs
 

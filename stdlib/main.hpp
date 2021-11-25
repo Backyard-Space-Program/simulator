@@ -31,8 +31,8 @@
 #if !defined(MAIN_HPP)
 #define MAIN_HPP
 
-#include "board.hpp"
+#include "../source/board.hpp"
 
-Board board;
+extern Board* board;
 
 #endif // MAIN_HPP

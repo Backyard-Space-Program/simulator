@@ -34,17 +34,13 @@
 #include <string>
 #include <vector>
 #include <errno.h>
-#include "error.hpp"
+#include "lib.hpp"
 
 #if defined(__APPLE__) || defined(__linux__)
 # include <dlfcn.h>
 #elif defined(__WIN32)
 # error Your computer does not support the neccicary libraries. Upgrade to macOS or get a real Linux computer.
 #endif // __APPLE__ || __linux__
-
-#if defined(KEY_LIB)
-extern const char* KEY_LIB_SYMBOLS[]; // XXX: future feature
-#endif // KEY_LIB
 
 struct Library {
 	std::string name;

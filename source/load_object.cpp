@@ -55,25 +55,26 @@ void* load_symbol(const char* symbol_name, const char* lib_name) {
 	} else {
 		lib = dlopen(lib_name, RTLD_LAZY);
 		if (lib == NULL) {
-			error::error("could not load the library " + std::string(lib_name) + ": \33[31m" + std::string(dlerror()) + "\33[0m");
+			lib::logError("could not load the library " + std::string(lib_name) + ": \33[31m" + std::string(dlerror()) + "\33[0m");
 			return nullptr;
 		}
 	}
 
 	void* symbol = dlsym(lib, symbol_name);
 	if (symbol == NULL) {
-		error::error("could not load the symbol " + std::string(symbol_name) + ": \33[1m" + std::string(dlerror()) + "\33[0m");
+		lib::logError("could not load the symbol " + std::string(symbol_name) + ": \33[1m" + std::string(dlerror()) + "\33[0m");
 		dlclose(lib);
 		return nullptr;
 	}
 	if (lib_is_loaded) {
-		std::cout << "Loaded symbol" << symbol_name << "\n";
+		// std::cout << "Loaded symbol" << symbol_name << "\n";
+		lib::log("Loaded symbol " + std::string(symbol_name));
 		goto _return;
 	}
 
 	loaded_objects.push_back(Library{ std::string(lib_name), lib });
-
-	std::cout << "Loaded symbol " << symbol_name << " and " << lib_name << "\n";
+	lib::log("Loaded symbol " + std::string(symbol_name) + " and library " + std::string(lib_name));
+	// std::cout << "Loaded symbol " << symbol_name << " and " << lib_name << "\n";
 
 _return:
 	return symbol;
@@ -85,7 +86,7 @@ _return:
 
 void close_libs() {
 	for (unsigned long i = 0; i < loaded_objects.size(); i++) {
-		std::cout << "Closing library " << loaded_objects[i].name << "\n";
+		lib::log("Closing library " + loaded_objects[i].name);
 		dlclose(loaded_objects[i].handle);
 	}
 }

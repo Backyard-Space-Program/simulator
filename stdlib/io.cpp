@@ -30,25 +30,31 @@
 
 #include "io.hpp"
 
-int eval_pin(Pin pin) { // turns voltage to value
-	if (pin >= board.pin_high) return HIGH;
+extern "C" {
+
+int eval_pin(PinNo pin) { // turns voltage to value
+	if ((double)pin >= board->pin_high) return HIGH;
 	else return LOW;
 }
 
 int pin_eval(Mode value) { // turns value to voltage
-	if (value == HIGH) return board.pin_high;
-	else if (value == LOW) return board.pin_low;
+	if (value == HIGH) return board->pin_high;
+	else if (value == LOW) return board->pin_low;
 	else return -1;
 }
 
-void pinMode(Pin pin, Mode mode) {
-	board.pins[pin].mode = mode;
+void pinMode(PinNo pin, Mode mode) {
+	if (mode != INPUT && mode != OUTPUT) return;
+	std::cout << board << "\n";
+	board->pins[pin - 1].mode = mode;
 }
 
-int digitalRead(Pin pin) {
-	return eval_pin(board.pins[pin].voltage);
+int digitalRead(PinNo pin) {
+	return eval_pin(board->pins[pin - 1].voltage);
 }
 
-void digitalWrite(Pin pin, Mode value) {
-	board.pins[pin].voltage = pin_eval(value);
+void digitalWrite(PinNo pin, Mode value) {
+	board->pins[pin - 1].voltage = pin_eval(value);
 }
+
+} // extern "C"

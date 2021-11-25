@@ -32,8 +32,13 @@
 
 AutoreleasePool global_pool;
 
+Board* global_board;
+Pin* global_pins;
+
 void pool_drain() {
 	close_libs();
+	if (global_board) delete global_board;
+	if (global_pins) delete[] global_pins;
 	lib::log("Pool Drained");
 }
 
@@ -50,6 +55,27 @@ int main(int argc, char** argv) {
     if (return_value != 0) {
         return return_value;
     }
+
+	unsigned int num_pins = 64;
+
+	global_pins = new Pin[num_pins];
+	global_board = new Board;
+
+	global_board->name = "Not-A-Teensy";
+	global_board->numPins = num_pins;
+	global_board->pins = global_pins;
+
+	global_board->pin_high = 2.0;
+	global_board->pin_low = 0.0;
+
+	Board* std_board = (Board*)load_symbol("board", argv[1]);
+	std_board = global_board;
+
+	void (*std_pinMode)(PinNo, Mode) = (void(*)(PinNo, Mode))load_symbol("pinMode", argv[1]);
+
+	std_pinMode(1, OUTPUT);
+
+	lib::log(std::to_string(std_board->pins[0].mode));
 
 	return 0;
 }
