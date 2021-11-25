@@ -30,6 +30,8 @@
 
 #include "main.hpp"
 
+#include <io.hpp>
+
 AutoreleasePool global_pool;
 
 Board* global_board;
@@ -68,7 +70,8 @@ int main(int argc, char** argv) {
 	global_board->pin_high = 2.0;
 	global_board->pin_low = 0.0;
 
-	
+	pinMode(1, OUTPUT);
+	lib::log(std::to_string(global_board->pins[0].mode));
 
 	return 0;
 }

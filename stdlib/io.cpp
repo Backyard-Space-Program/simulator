@@ -49,7 +49,6 @@ int pin_eval(Mode value) { // turns value to voltage
 
 void pinMode(PinNo pin, Mode mode) {
 	if (mode != INPUT && mode != OUTPUT) return;
-	std::cout << global_board << "\n";
 	global_board->pins[pin - 1].mode = mode;
 }
 
