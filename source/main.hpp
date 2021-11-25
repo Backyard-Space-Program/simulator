@@ -45,6 +45,8 @@
 #include "board.hpp"
 
 extern AutoreleasePool global_pool;
+extern Board* global_board;
+extern Pin* global_pins;
 
 int usage();
 

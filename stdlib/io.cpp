@@ -30,31 +30,35 @@
 
 #include "io.hpp"
 
+// Defined in source/main.hpp, but have to be re-defined here because Clang is retarted
+extern Board* global_board;
+extern Pin* global_pins;
+
 extern "C" {
 
 int eval_pin(PinNo pin) { // turns voltage to value
-	if ((double)pin >= board->pin_high) return HIGH;
+	if ((double)pin >= global_board->pin_high) return HIGH;
 	else return LOW;
 }
 
 int pin_eval(Mode value) { // turns value to voltage
-	if (value == HIGH) return board->pin_high;
-	else if (value == LOW) return board->pin_low;
+	if (value == HIGH) return global_board->pin_high;
+	else if (value == LOW) return global_board->pin_low;
 	else return -1;
 }
 
 void pinMode(PinNo pin, Mode mode) {
 	if (mode != INPUT && mode != OUTPUT) return;
-	std::cout << board << "\n";
-	board->pins[pin - 1].mode = mode;
+	std::cout << global_board << "\n";
+	global_board->pins[pin - 1].mode = mode;
 }
 
 int digitalRead(PinNo pin) {
-	return eval_pin(board->pins[pin - 1].voltage);
+	return eval_pin(global_board->pins[pin - 1].voltage);
 }
 
 void digitalWrite(PinNo pin, Mode value) {
-	board->pins[pin - 1].voltage = pin_eval(value);
+	global_board->pins[pin - 1].voltage = pin_eval(value);
 }
 
 } // extern "C"

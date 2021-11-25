@@ -34,7 +34,7 @@
 #include <iostream>
 #include "main.hpp"
 #include "pin.hpp"
-#include "../source/board.hpp"
+#include "../source/main.hpp"
 
 extern "C" {
 	void pinMode(PinNo, Mode);

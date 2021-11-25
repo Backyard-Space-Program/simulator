@@ -32,7 +32,6 @@
 #define MAIN_HPP
 
 #include "../source/board.hpp"
-
-extern Board* board;
+#include "../source/main.hpp"
 
 #endif // MAIN_HPP

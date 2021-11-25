@@ -68,14 +68,7 @@ int main(int argc, char** argv) {
 	global_board->pin_high = 2.0;
 	global_board->pin_low = 0.0;
 
-	Board* std_board = (Board*)load_symbol("board", argv[1]);
-	std_board = global_board;
-
-	void (*std_pinMode)(PinNo, Mode) = (void(*)(PinNo, Mode))load_symbol("pinMode", argv[1]);
-
-	std_pinMode(1, OUTPUT);
-
-	lib::log(std::to_string(std_board->pins[0].mode));
+	
 
 	return 0;
 }
