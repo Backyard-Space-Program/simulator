@@ -1,7 +1,7 @@
 //
-// board.hpp
+// board_parser.hpp
 //
-// created at 24/11/2021 16:45:51
+// created at 25/11/2021 18:14:29
 // written by Backyard Space Program
 //
 
@@ -28,62 +28,10 @@
 // SOFTWARE.
 
 
-#if !defined(BOARD_HPP)
-#define BOARD_HPP
+#if !defined(BOARD_PARSER_HPP)
+#define BOARD_PARSER_HPP
 
-#include <string>
-#include <vector>
-#include "../stdlib/pin.hpp"
+#include "csv_parser.hpp"
+#include "cfg_parser.hpp"
 
-enum PinType {
-	GPIO,
-
-	// SPI
-	MISO,
-	MOSI,
-	SCK,
-	CS,
-
-	// I2C
-	SCL,
-	SDA,
-
-	// POWER
-	GND,
-	_5V,
-	_3V,
-	VIN,
-	RESET,
-
-	SERIAL,
-	SERIAL1,
-	SERIAL2,
-
-	NONE
-};
-
-struct Pin {
-	unsigned int pinNo;
-	std::string name;
-	PinType type;
-
-	Mode mode; // GPIO only?
-	double voltage; // GPIO only
-
-	bool isPWM;
-	bool isAnalog;
-	bool isInt;
-};
-
-class Board {
-public:
-	std::string name;
-	unsigned int numPins;
-	Pin* pins;
-
-	double pin_high;
-	double pin_low;
-
-};
-
-#endif // BOARD_HPP
+#endif // BOARD_PARSER_HPP

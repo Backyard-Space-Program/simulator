@@ -3,4 +3,4 @@ Simulates flight computers.
 
 This is a description.
 
-> **SAVE ME FROM THE PROGRAMMING MONSTER I'VE BECOME**
+Put all of your source code in the `board_source` directory when ready to build. Make the directory if needed.

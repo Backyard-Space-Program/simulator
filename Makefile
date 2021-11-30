@@ -19,13 +19,15 @@ TARGET = simulator
 all: $(TARGET)
 
 $(BUILD_DIR)/%_cpp.o: $(SRC_DIR)/%.cpp
+	@if [[ ! -d "output" ]]; then mkdir output; fi
 	$(CXX) $(CXX_ARGS) $< -o $@
 
 $(BUILD_DIR)/%_std.o: $(STD_DIR)/%.cpp
+	@if [[ ! -d "output" ]]; then mkdir output; fi
 	$(CXX) $(STD_ARGS) $< -o $@
 
 $(TARGET): $(OBJ_FILES)
 	$(CXX) -o $(TARGET) $(OBJ_FILES)
 
 clean:
-	rm -r output/* $(TARGET)
+	rm -r output $(TARGET)
