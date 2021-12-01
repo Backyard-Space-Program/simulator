@@ -37,10 +37,18 @@ AutoreleasePool global_pool;
 Board* global_board;
 Pin* global_pins;
 
+void signal_handler(int sig) {
+	lib::log("Received signal " + std::to_string(sig));
+	pool_drain();
+	exit(sig);
+}
+
 void pool_drain() {
 	close_libs();
-	if (global_board) delete global_board;
-	if (global_pins) delete[] global_pins;
+	std::cout << global_board << "\n";
+	if (global_board != nullptr) delete global_board;
+	std::cout << "1\n";
+	if (global_pins != nullptr) delete[] global_pins;
 	lib::log("Pool Drained");
 }
 
@@ -52,6 +60,10 @@ int usage() {
 int main(int argc, char** argv) {
 	global_pool = AutoreleasePool();
 	global_pool.appendReleaseFunction(pool_drain);
+
+	for (int i = 1; i < 6; i++) {
+		signal(i, signal_handler);
+	}
 
     int return_value = parseargs(argc, argv);
     if (return_value != 0) {
@@ -70,8 +82,11 @@ int main(int argc, char** argv) {
 	global_board->pin_high = 2.0;
 	global_board->pin_low = 0.0;
 
-	pinMode(1, OUTPUT);
-	lib::log(std::to_string(global_board->pins[0].mode));
+	setup();
+
+	for (;;) {
+		loop();
+	}
 
 	return 0;
 }

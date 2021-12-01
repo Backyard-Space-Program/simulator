@@ -33,7 +33,10 @@
 
 #include <string>
 #include <vector>
+#include <chrono>
 #include "../stdlib/pin.hpp"
+
+extern HardwareSerial Serial;
 
 enum PinType {
 	GPIO,
@@ -83,6 +86,8 @@ public:
 
 	double pin_high;
 	double pin_low;
+
+	std::chrono::high_resolution_clock::time_point start_time;
 
 };
 

@@ -34,6 +34,12 @@
 extern Board* global_board;
 extern Pin* global_pins;
 
+long double curtime() {
+  return std::chrono::duration_cast<std::chrono::milliseconds>(
+    std::chrono::system_clock::now().time_since_epoch()
+  ).count();
+}
+
 extern "C" {
 
 int eval_pin(PinNo pin) { // turns voltage to value
@@ -58,6 +64,10 @@ int digitalRead(PinNo pin) {
 
 void digitalWrite(PinNo pin, Mode value) {
 	global_board->pins[pin - 1].voltage = pin_eval(value);
+}
+
+unsigned long millis() {
+	// stuff
 }
 
 } // extern "C"

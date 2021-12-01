@@ -32,14 +32,20 @@
 #define IO_HPP
 
 #include <iostream>
+#include <ctime>
+#include <ratio>
+#include <chrono>
 #include "main.hpp"
 #include "pin.hpp"
 #include "../source/main.hpp"
+
+long double curtime();
 
 extern "C" {
 	void pinMode(PinNo, Mode);
 	int digitalRead(PinNo);
 	void digitalWrite(PinNo, Mode);
+	unsigned long millis();
 }
 
 // TODO: finish io funcs

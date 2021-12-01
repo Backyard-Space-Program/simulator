@@ -1,6 +1,6 @@
 CXX = g++
 
-CXX_ARGS = -c -Wall -Wextra -std=c++17 -Istdlib
+CXX_ARGS = -c -Wall -Wextra -std=c++17 -Istdlib -Isource
 
 BUILD_DIR = output
 SRC_DIR = board_source
@@ -17,10 +17,11 @@ all: $(TARGET)
 
 $(BUILD_DIR)/%_src.o: $(SRC_DIR)/%.cpp
 	@if [[ ! -d "output" ]]; then mkdir output; fi
+	@if [[ ! -f "simulator" ]]; then make; fi
 	$(CXX) $(CXX_ARGS) $< -o $@
 
 $(TARGET): $(OBJ_FILES)
-	$(CXX) -o $(TARGET) $(OBJ_FILES)
+	$(CXX) -shared -o $(TARGET) simulator $(OBJ_FILES)
 
 clean:
 	rm -r output $(TARGET)

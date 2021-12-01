@@ -28,12 +28,6 @@
 // SOFTWARE.
 
 
-// #if defined(__cplusplus)
-extern "C" {
-// #endif // __cplusplus
+#include "board.hpp"
 
-// code...
-
-// #if defined(__cplusplus)
-}
-// #endif // __cplusplus
+HardwareSerial Serial;

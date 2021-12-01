@@ -1,7 +1,7 @@
 //
-// main.hpp
+// serial.cpp
 //
-// created at 19/11/2021 19:24:31
+// created at 30/11/2021 20:11:19
 // written by Backyard Space Program
 //
 
@@ -28,31 +28,10 @@
 // SOFTWARE.
 
 
-#if !defined(MAIN_HPP)
-#define MAIN_HPP
+#include "serial.hpp"
 
-#include <string>
-#include <unordered_map>
-#include <algorithm>
-#include <assert.h>
-#include <Arduino.h>
-#include <csignal>
+void HardwareSerial::begin(unsigned int baud) {
+	lib::log("Serial begin at " + std::to_string(baud) + " baud");
+}
 
-#include "lib.hpp"
-#include "args.hpp"
-#include "version.hpp"
-#include "load_object.hpp"
-#include "autorelease.hpp"
-#include "thread.hpp"
-#include "board.hpp"
 
-extern AutoreleasePool global_pool;
-extern Board* global_board;
-extern Pin* global_pins;
-
-void signal_handler(int);
-void pool_drain();
-
-int usage();
-
-#endif // MAIN_HPP

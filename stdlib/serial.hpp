@@ -1,7 +1,7 @@
 //
-// main.hpp
+// serial.hpp
 //
-// created at 19/11/2021 19:24:31
+// created at 30/11/2021 20:11:19
 // written by Backyard Space Program
 //
 
@@ -28,31 +28,49 @@
 // SOFTWARE.
 
 
-#if !defined(MAIN_HPP)
-#define MAIN_HPP
+#if !defined(SERIAL_HPP)
+#define SERIAL_HPP
 
+#include <lib.hpp>
 #include <string>
-#include <unordered_map>
-#include <algorithm>
-#include <assert.h>
-#include <Arduino.h>
-#include <csignal>
 
-#include "lib.hpp"
-#include "args.hpp"
-#include "version.hpp"
-#include "load_object.hpp"
-#include "autorelease.hpp"
-#include "thread.hpp"
-#include "board.hpp"
+#define DEC 10
+#define HEX 16
+#define OCT 8
+#ifdef BIN // Prevent warnings if BIN is previously defined in "iotnx4.h" or similar
+#undef BIN
+#endif
+#define BIN 2
 
-extern AutoreleasePool global_pool;
-extern Board* global_board;
-extern Pin* global_pins;
+class HardwareSerial {
+public:
+	inline  HardwareSerial() { lib::log("Serial init"); };
+	inline ~HardwareSerial() { lib::log("Serial deinit"); };
 
-void signal_handler(int);
-void pool_drain();
+	void begin(unsigned int);
 
-int usage();
+	inline void flush() {};
 
-#endif // MAIN_HPP
+	/*
+    size_t print(const char[]);
+    size_t print(char);
+    size_t print(unsigned char, int = DEC);
+    size_t print(int, int = DEC);
+    size_t print(unsigned int, int = DEC);
+    size_t print(long, int = DEC);
+    size_t print(unsigned long, int = DEC);
+    size_t print(double, int = 2);
+
+    size_t println(const char[]);
+    size_t println(char);
+    size_t println(unsigned char, int = DEC);
+    size_t println(int, int = DEC);
+    size_t println(unsigned int, int = DEC);
+    size_t println(long, int = DEC);
+    size_t println(unsigned long, int = DEC);
+    size_t println(double, int = 2);
+    size_t println(void);
+	*/
+};
+
+#endif // SERIAL_HPP
