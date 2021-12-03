@@ -1,3 +1,5 @@
 *.so
 MakeSource.py
 Makefile.src
+simulator
+*.swp
