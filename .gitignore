@@ -2,4 +2,5 @@
 MakeSource.py
 Makefile.src
 simulator
+output
 *.swp
